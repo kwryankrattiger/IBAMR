@@ -36,12 +36,12 @@ endif ()
 
 # Determine which track to submit to.
 set(ctest_track "experimental")
-if ("$ENV{GITHUB_EVENT_NAME}" STREQUAL "pull_request")
+if ("$ENV{GITHUB_EVENT_NAME}" MATCHES "pull_request")
   # Put pull request testing in the "merge requests" track
   set(ctest_track "merge-requests")
-elseif ("$ENV{GITHUB_EVENT_NAME}" STREQUAL "push")
+elseif ("$ENV{GITHUB_EVENT_NAME}" MATCHES "push")
   # Put all branch tests in a track named the same as the branch.
   # Currently, only master is tested, but eventually branch names
   # such as "release-0.9" may exist and should have their own tracks.
-  string(REGEX_REPLACE "refs\\/heads\\/" "" ctest_track "$ENV{GITHUB_REF}")
+  string(REGEX REPLACE "refs\\/heads\\/" "" ctest_track "$ENV{GITHUB_REF}")
 endif ()

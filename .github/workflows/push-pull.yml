@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - master
+      - update_cdash_config
   pull_request:
     branches:
       - master
